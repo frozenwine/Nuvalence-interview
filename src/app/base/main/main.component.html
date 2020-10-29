@@ -1,0 +1,36 @@
+<div class="">
+  <mat-toolbar color="primary" class="header mat-elevation-z6">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="">Nuvalence Interview App</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav 
+      #snav mode="over" 
+      fixedInViewport="false"
+      opened="false"
+      class="sidenav"
+    >
+      <mat-nav-list>
+        <a 
+          mat-list-item
+          routerLink="." 
+          *ngFor="let nav of fillerNav"
+          class="nav-list-item"
+        >
+          {{nav}}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
