@@ -22,6 +22,7 @@ import { HomeComponent } from '../home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptor/api.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { LoginGuard } from './service/login.guard';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
   providers:[
     BnNgIdleService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    LoginGuard
   ],
   entryComponents: [
     ConfirmModalComponent

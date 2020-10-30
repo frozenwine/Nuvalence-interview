@@ -1,3 +1,5 @@
+import { LoginService } from './../service/login.service';
+import { NavItem } from './../model/nav-item.model';
 import { ModalService } from './../service/modal.service';
 import { UserSessionService } from './../service/user-session.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -15,30 +17,18 @@ export class MainComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
 
-  fillerNav = Array.from({length: 5}, (_, i) => `Nav Item ${i + 1}`);
-
-  fillerContent = Array.from({length: 5}, () =>
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
-
-  private _mobileQueryListener: () => void;
+  fillerNav: NavItem[] = [];
+  bottomNav: NavItem[] = []; 
 
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
-    media: MediaMatcher,
     private userSessionService: UserSessionService,
     private bnIdle: BnNgIdleService,
     private dialog: MatDialog,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private loginSerice: LoginService
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-
     this.modalService.mainComponent = this;
+    this.loginSerice.mainComponent = this;
   }
 
   ngOnInit() {
@@ -53,7 +43,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   launchModal(modalModel: ModalModel) : MatDialogRef<any> {
@@ -63,6 +52,27 @@ export class MainComponent implements OnInit {
       maxHeight: modalModel.maxHeight,
       data: modalModel.data
     })
+  }
+
+  initNavItems() {
+    this.fillerNav = [
+      { label: 'Home', path: 'home'}
+    ];
+    this.bottomNav = [
+      { label: 'Delete User', id: 'Delete' },
+      { label: 'Log Out', id: 'logout' }
+    ]; 
+  }
+
+  clearNavItems() {
+    this.fillerNav = [];
+    this.bottomNav = []; 
+  }
+
+  navItemClicked(nav: NavItem) {
+    if(nav.id == 'logout') {
+      this.loginSerice.logout();
+    }
   }
 
 }

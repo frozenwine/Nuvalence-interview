@@ -2,17 +2,20 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { MainComponent } from '../main/main.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  mainComponent: MainComponent;
   userName : string = null;
   token : string = null;
   signupUrl = 'user/register';
   loginUrl= 'user/login';
-
+  logoutUrl = 'user/logout';
+  
 
   constructor(private httpClient: HttpClient, private router: Router) { 
     this.token = localStorage.getItem(environment.AUTH_TOKEN);
@@ -33,6 +36,7 @@ export class LoginService {
             this.userName = res[environment.USER_NAME]
             localStorage.setItem(environment.AUTH_TOKEN, this.token);
             localStorage.setItem(environment.USER_NAME, this.userName);
+            this.mainComponent.initNavItems();
             this.router.navigate(['home']);
         }else{
           this.cleanAuthData();
@@ -50,11 +54,13 @@ export class LoginService {
     var localStorageToken = localStorage.getItem(environment.AUTH_TOKEN);
     if(this.token != null){
       console.log('token exist');
+      this.mainComponent.initNavItems();
       return true;  
     }else if(localStorageToken != null){
       console.log('localStorageToken exists', localStorageToken);
       this.token = localStorageToken;
       this.setUserName();
+      this.mainComponent.initNavItems();
       console.log('user:', this.userName);
       return true;
     }else{
@@ -64,7 +70,7 @@ export class LoginService {
   }
 
   logout(){
-    this.httpClient.get('/api/logout').subscribe(
+    this.httpClient.post(this.logoutUrl, {}).subscribe(
       res =>{
         console.log(res);
         this.cleanAuthData();
@@ -82,6 +88,7 @@ export class LoginService {
     this.router.navigate(['login']);
     this.token = null;
     this.userName = null;
+    this.mainComponent.clearNavItems();
   }
 
   setUserName(){

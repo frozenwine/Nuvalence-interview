@@ -7,6 +7,7 @@ export const environment = {
   AUTH_TOKEN: 'token',
   USER_NAME: 'name',
   API_PREFIX: 'https://api-nodejs-todolist.herokuapp.com/',
+  AUTH_HEADER: 'Authorization'
 };
 
 /*
