@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p> {{ data.message }} </p>
+  <base-input [label]="data.description" [dataControl]="inputControl"></base-input>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="data.displayCancel" mat-button mat-raised-button (click)="onNoClick()"> 
+    {{data.cancelBtnText}} 
+  </button>
+  <button mat-button mat-raised-button color="primary" (click)="onOKClick()" cdkFocusInitial
+    [disabled]="inputControl.invalid">
+    {{data.okBtnText}}
+  </button>
+</div>

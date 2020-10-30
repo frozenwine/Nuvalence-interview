@@ -1,9 +1,11 @@
+import { InputModalComponent } from './../modal/input-modal/input-modal.component';
 import { ConfirmModel } from './../model/confirm.model';
 import { MainComponent } from './../main/main.component';
 import { Injectable } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../modal/confirm-modal/confirm-modal.component';
 import { Observable } from 'rxjs';
+import { InputModel } from '../model/input.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,8 @@ export class ModalService {
     switch(modalType) {
       case ModalType.CONFIRM:
         return ConfirmModalComponent
+      case ModalType.INPUT:
+        return InputModalComponent
     }
   }
 
@@ -38,10 +42,21 @@ export class ModalService {
     }
     return this.launchModel(ModalType.CONFIRM, newConfirmModel).afterClosed();
   }
+
+  launchInputModal(title: string, message: string, hideCancel?: boolean) : Observable<any>{
+    const newInputModel = new InputModel();
+    newInputModel.title = title;
+    newInputModel.message = message;
+    if(hideCancel) {
+      newInputModel.displayCancel = false;
+    }
+    return this.launchModel(ModalType.INPUT, newInputModel).afterClosed();
+  }
 }
 
 export enum ModalType {
   CONFIRM = 'CONFIRM',
+  INPUT = 'INPUT'
 }
 
 export class ModalModel {

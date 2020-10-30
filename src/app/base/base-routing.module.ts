@@ -7,7 +7,7 @@ import { LoginGuard } from './service/login.guard';
 import { TaskComponent } from '../task/task.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'login', component: LoginComponent},
   {
     path: 'signup',

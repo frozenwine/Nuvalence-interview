@@ -25,6 +25,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TaskComponent } from '../task/task.component';
+import { InputModalModule } from './modal/input-modal/input-modal.module';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { TaskComponent } from '../task/task.component';
     ReactiveFormsModule,
     BaseInputModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    InputModalModule,
+    MatTableModule
   ],
   exports: [
     MainComponent
