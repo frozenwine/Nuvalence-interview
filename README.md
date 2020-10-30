@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## First time 
-Run `ng install` before launching this app
+Run `npm install` before launching this app
 
 ## Development server
 
