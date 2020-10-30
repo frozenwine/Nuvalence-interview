@@ -23,6 +23,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptor/api.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LoginGuard } from './service/login.guard';
     FormsModule,
     ReactiveFormsModule,
     BaseInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   exports: [
     MainComponent

@@ -1,7 +1,9 @@
+import { NotificationService } from './../service/notification.service';
 import { LoginService } from './../service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private loginService: LoginService,
+    private notif: NotificationService) { }
 
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
@@ -21,7 +27,17 @@ export class LoginComponent implements OnInit {
   }
 
   loginClicked() {
-    this.loginService.login(this.loginFormGroup.value);
+    this.loginService.login(this.loginFormGroup.value).subscribe(
+      res => {
+        console.log(res);
+        if(res[environment.AUTH_TOKEN]){
+            this.loginService.initUser(res);
+            this.router.navigate(['home']);
+            this.notif.notif('Welcome ' + this.loginService.userName);
+        }
+      },
+      err => this.notif.notifErr(err)
+    );;
   }
 
   signupClicked() {

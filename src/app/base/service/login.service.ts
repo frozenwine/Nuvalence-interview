@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { MainComponent } from '../main/main.component';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export class LoginService {
   signupUrl = 'user/register';
   loginUrl= 'user/login';
   logoutUrl = 'user/logout';
+  deleteUrl = 'user/me';
+  user: User;
   
-
   constructor(private httpClient: HttpClient, private router: Router) { 
     this.token = localStorage.getItem(environment.AUTH_TOKEN);
     this.userName = localStorage.getItem(environment.USER_NAME);
@@ -28,26 +30,21 @@ export class LoginService {
 
   login(userCredential){
     console.log('login: ', userCredential);
-    this.httpClient.post(this.loginUrl, userCredential).subscribe(
-      res => {
-        console.log(res);
-        if(res[environment.AUTH_TOKEN]){
-            this.token = res[environment.AUTH_TOKEN];
-            this.userName = res[environment.USER_NAME]
-            localStorage.setItem(environment.AUTH_TOKEN, this.token);
-            localStorage.setItem(environment.USER_NAME, this.userName);
-            this.mainComponent.initNavItems();
-            this.router.navigate(['home']);
-        }else{
-          this.cleanAuthData();
-          this.showMessage('Your username and password are incorrect')
-        }
-      },
-      error => {
-        this.cleanAuthData();
-        this.showMessage('Unable to connect to server');
-      }
-    );
+    return this.httpClient.post(this.loginUrl, userCredential);
+  }
+
+  initUser(res) {
+    console.log(res);
+    if(res[environment.AUTH_TOKEN]){
+        this.token = res[environment.AUTH_TOKEN];
+        this.user = res[environment.USER];
+        this.userName = this.user.name;
+        localStorage.setItem(environment.AUTH_TOKEN, this.token);
+        localStorage.setItem(environment.USER_NAME, this.userName);
+        this.mainComponent.initNavItems();
+    }else{
+      this.cleanAuthData();
+    }
   }
 
   isAuthenticated () : boolean{
@@ -70,16 +67,7 @@ export class LoginService {
   }
 
   logout(){
-    this.httpClient.post(this.logoutUrl, {}).subscribe(
-      res =>{
-        console.log(res);
-        this.cleanAuthData();
-      },
-      error =>{
-        this.cleanAuthData();
-        console.log('Unable to connect to server');
-      }
-    );
+    return this.httpClient.post(this.logoutUrl, {});
   }
 
   cleanAuthData(){
@@ -99,6 +87,10 @@ export class LoginService {
 
   showMessage(msg){
     //this.snackBar.open(msg, 'X', { duration: 5000});
+  }
+
+  deleteUser() {
+    return this.httpClient.delete(this.deleteUrl);
   }
 
 }
