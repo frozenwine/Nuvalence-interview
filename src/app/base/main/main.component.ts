@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
 
   fillerNav: NavItem[] = [];
   bottomNav: NavItem[] = []; 
+  username: string;
 
   constructor(
     private userSessionService: UserSessionService,
@@ -35,6 +36,9 @@ export class MainComponent implements OnInit {
     this.modalService.mainComponent = this;
     this.loginSerice.mainComponent = this;
     this.notif.mainComponent = this;
+    this.loginSerice.headerUserName$.subscribe(
+      newName => this.username = newName
+    );
   }
 
   ngOnInit() {
@@ -62,7 +66,8 @@ export class MainComponent implements OnInit {
 
   initNavItems() {
     this.fillerNav = [
-      { label: 'Home', path: 'home'}
+      { label: 'Home', path: 'home'},
+      { label: 'Task', path: 'task'}
     ];
     this.bottomNav = [
       { label: 'Delete User', id: 'delete' },
@@ -82,7 +87,7 @@ export class MainComponent implements OnInit {
           console.log(res);
           if(res) {
             this.loginSerice.cleanAuthData();
-            this.showMessage('You have logged out')
+            this.showMessage('You have logged out');
           }
         },
         err => this.showMessage(err)

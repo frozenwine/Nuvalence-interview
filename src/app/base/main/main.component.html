@@ -2,6 +2,11 @@
   <mat-toolbar color="primary" class="header mat-elevation-z6">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="">Nuvalence Interview App</h1>
+    <span class="example-spacer"></span>
+    <span *ngIf="username">{{username}}</span>
+    <button mat-icon-button *ngIf="username">
+      <mat-icon>home</mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container">
@@ -10,7 +15,6 @@
       fixedInViewport="false"
       opened="false"
       class="sidenav"
-      fxLayout="column" fxLayoutAlign="space-between center"
     >
       <mat-nav-list>
         <a 

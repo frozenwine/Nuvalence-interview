@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
     private notif: NotificationService) { }
 
   ngOnInit(): void {
+    if(this.loginService.isAuthenticated()) {
+      this.router.navigate(['home']);
+    }
+    
     this.loginFormGroup = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]

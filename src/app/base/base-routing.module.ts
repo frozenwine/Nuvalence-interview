@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './service/login.guard';
+import { TaskComponent } from '../task/task.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -15,8 +16,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [LoginGuard]
+    canActivate: [LoginGuard],
     //loadChildren: ()=> import('src/app/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'task',
+    component: TaskComponent,
+    canActivate: [LoginGuard],
+    //loadChildren: ()=> import('src/app/task/task.module').then(m => m.TaskModule)
   },
   { path: '**', component: LoginComponent }
 

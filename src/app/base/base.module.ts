@@ -24,13 +24,15 @@ import { ApiInterceptor } from './interceptor/api.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TaskComponent } from '../task/task.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,

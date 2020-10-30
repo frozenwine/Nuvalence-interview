@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { MainComponent } from '../main/main.component';
 import { User } from '../model/user.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class LoginService {
   logoutUrl = 'user/logout';
   deleteUrl = 'user/me';
   user: User;
+  headerUserName$ = new BehaviorSubject<string>(null);
   
   constructor(private httpClient: HttpClient, private router: Router) { 
     this.token = localStorage.getItem(environment.AUTH_TOKEN);
@@ -39,6 +41,7 @@ export class LoginService {
         this.token = res[environment.AUTH_TOKEN];
         this.user = res[environment.USER];
         this.userName = this.user.name;
+        this.headerUserName$.next(this.userName);
         localStorage.setItem(environment.AUTH_TOKEN, this.token);
         localStorage.setItem(environment.USER_NAME, this.userName);
         this.mainComponent.initNavItems();
@@ -52,11 +55,13 @@ export class LoginService {
     if(this.token != null){
       console.log('token exist');
       this.mainComponent.initNavItems();
+      this.headerUserName$.next(this.userName);
       return true;  
     }else if(localStorageToken != null){
       console.log('localStorageToken exists', localStorageToken);
       this.token = localStorageToken;
       this.setUserName();
+      this.headerUserName$.next(this.userName);
       this.mainComponent.initNavItems();
       console.log('user:', this.userName);
       return true;
@@ -77,6 +82,7 @@ export class LoginService {
     this.token = null;
     this.userName = null;
     this.mainComponent.clearNavItems();
+    this.headerUserName$.next(this.userName);
   }
 
   setUserName(){
