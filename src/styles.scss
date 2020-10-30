@@ -20,3 +20,7 @@ $colors: (
   border-right: 2px solid map-get($colors, dark-grey);
   color: $primary;
 }
+
+.material-icons {
+  cursor: pointer;
+}

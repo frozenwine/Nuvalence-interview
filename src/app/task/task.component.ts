@@ -16,10 +16,16 @@ export class TaskComponent implements OnInit {
   count: number = 0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   columns = [
-    { columnDef: 'description', header : 'Description' },
-    { columnDef: 'completed', header : 'Completed' },
-    { columnDef: 'createdAt', header : 'Created At' },
-    { columnDef: 'updatedAt', header : 'Updated At' },
+    { columnDef: 'description', header : 'Description', type: 'text' },
+    { columnDef: 'completed', header : 'Completed', type: 'text' },
+    { columnDef: 'createdAt', header : 'Created At', type: 'text' },
+    { columnDef: 'updatedAt', header : 'Updated At', type: 'text' },
+    { columnDef: 'edit', header : 'Edit', type: 'clickableIcon', icon: 'create', 
+      showModal: (row) =>  this.editTask(row)
+    },
+    { columnDef: 'delete', header : 'Delete', type: 'clickableIcon', icon: 'delete_forever',
+      showModal: (row) =>  this.deleteTask(row)
+    },
   ];
   displayedColumns: string[] = [...this.columns.map(x => x.columnDef)];
 
@@ -65,6 +71,44 @@ export class TaskComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  editTask(row: TaskItem) {
+    this.modalService.launchConfirmModal('Edit Task', `Mark Task: ${row.description} as Completed?`)
+      .subscribe(res => {
+        if(res) {
+          this.notif.notif("Updating task...")
+          this.taskSerive.updateTask(row, {"completed": true}).subscribe(
+            res =>  {
+              this.notif.notif("Task Updated");
+              this.loadALlTask();
+            },
+            err => {
+              err.error = err.message;
+              this.notif.notifErr(err)
+            }
+          )
+        }
+      })
+  }
+
+  deleteTask(row: TaskItem) {
+    this.modalService.launchConfirmModal('Delete Task', `Delete Task: ${row.description}?`)
+      .subscribe(res => {
+        if(res) {
+          this.notif.notif("Deleting task...")
+          this.taskSerive.deleteTask(row).subscribe(
+            res =>  {
+              this.notif.notif("Task deleted");
+              this.loadALlTask();
+            },
+            err => {
+              err.error = err.message;
+              this.notif.notifErr(err)
+            }
+          )
+        }
+      })
   }
 
 }
