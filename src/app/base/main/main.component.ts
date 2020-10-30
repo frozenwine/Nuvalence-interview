@@ -67,7 +67,8 @@ export class MainComponent implements OnInit {
   initNavItems() {
     this.fillerNav = [
       { label: 'Home', path: 'home'},
-      { label: 'Task', path: 'task'}
+      { label: 'Task', path: 'task'},
+      { label: 'Profile', path: 'profile'},
     ];
     this.bottomNav = [
       { label: 'Delete User', id: 'delete' },
@@ -118,6 +119,10 @@ export class MainComponent implements OnInit {
     this._snackBar.open(message, '', {
       duration: 5000,
     });
+  }
+
+  homeIconClicked() {
+    this.router.navigate(['profile']);
   }
 
 }

@@ -29,6 +29,7 @@ import { InputModalModule } from './modal/input-modal/input-modal.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
+import { ProfileComponent } from '../profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatRadioModule } from '@angular/material/radio';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    TaskComponent
+    TaskComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

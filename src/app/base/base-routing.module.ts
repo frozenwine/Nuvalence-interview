@@ -1,3 +1,4 @@
+import { ProfileComponent } from './../profile/profile.component';
 import { HomeComponent } from './../home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,12 @@ const routes: Routes = [
   {
     path: 'task',
     component: TaskComponent,
+    canActivate: [LoginGuard],
+    //loadChildren: ()=> import('src/app/task/task.module').then(m => m.TaskModule)
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [LoginGuard],
     //loadChildren: ()=> import('src/app/task/task.module').then(m => m.TaskModule)
   },

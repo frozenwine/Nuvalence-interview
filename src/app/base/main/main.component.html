@@ -5,7 +5,7 @@
     <span class="example-spacer"></span>
     <span *ngIf="username">{{username}}</span>
     <button mat-icon-button *ngIf="username">
-      <mat-icon>home</mat-icon>
+      <mat-icon (click)="homeIconClicked()">home</mat-icon>
     </button>
   </mat-toolbar>
 
