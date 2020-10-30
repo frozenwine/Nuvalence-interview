@@ -1,0 +1,5 @@
+<mat-form-field class="full-width">
+  <mat-label>{{label}}</mat-label>
+  <input matInput [placeholder]="placeholder" [formControl]="dataControl">
+  <mat-error>{{getErrorMessage()}}</mat-error>
+</mat-form-field>

@@ -5,19 +5,13 @@
     </mat-card-header>
     <mat-card-content>
       <form fxLayout="column">
-        <mat-form-field>
-          <mat-label>User Name</mat-label>
-          <input matInput placeholder="Ex. Pizza">
-        </mat-form-field>
-      
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput>
-        </mat-form-field>
+        <base-input label="Email" [dataControl]="loginFormGroup.get('email')"></base-input>
+        <base-input label="Password" [dataControl]="loginFormGroup.get('password')"></base-input>
       </form>
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button color="accent">Login</button>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-raised-button color="accent" [disabled]="loginFormGroup.invalid" (click)="loginClicked()">Login</button>
+      <button mat-raised-button color="accent" (click)="signupClicked()">Click here to sign up</button>
     </mat-card-actions>
   </mat-card>
   

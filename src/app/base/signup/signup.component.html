@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="login-main">
+    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-title>Sign Up New User</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form fxLayout="column">
+        <base-input label="Email" [dataControl]="signupForm.get('email')"></base-input>
+        <base-input label="Password" [dataControl]="signupForm.get('password')"></base-input>
+        <base-input label="Name" [dataControl]="signupForm.get('name')"></base-input>
+        <base-input label="age" [dataControl]="signupForm.get('age')"></base-input>
+      </form>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-raised-button color="accent" [disabled]="signupForm.invalid" (click)="signupClicked()">Sign Up</button>
+      <button mat-raised-button color="accent" (click)="loginClicked()">Click here to log in</button>
+    </mat-card-actions>
+  </mat-card>
+  
+</div>

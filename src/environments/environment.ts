@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  AUTH_TOKEN: 'token',
+  USER_NAME: 'name',
+  API_PREFIX: 'https://api-nodejs-todolist.herokuapp.com/',
 };
 
 /*
