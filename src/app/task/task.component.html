@@ -11,6 +11,19 @@
   <ng-template #taskPanel>
     You have {{count}} task(s).
 
+    <section class="task-section">
+      <label>Task Filter:</label>
+      <mat-radio-group [(ngModel)]="taskFilter" (change)="taskFilterChanged($event)">
+        <mat-radio-button value="all">
+          All
+        </mat-radio-button>
+        <mat-radio-button value="completed">
+          Completed
+        </mat-radio-button>
+
+      </mat-radio-group>
+    </section>
+
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>

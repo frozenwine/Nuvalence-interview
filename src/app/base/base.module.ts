@@ -26,7 +26,9 @@ import { LoginGuard } from './service/login.guard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TaskComponent } from '../task/task.component';
 import { InputModalModule } from './modal/input-modal/input-modal.module';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {MatTableModule} from '@angular/material/table';
     HttpClientModule,
     MatSnackBarModule,
     InputModalModule,
-    MatTableModule
+    MatTableModule,
+    MatSlideToggleModule,
+    MatRadioModule
   ],
   exports: [
     MainComponent

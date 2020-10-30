@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskItem } from './task-item.model';
 
@@ -13,6 +13,11 @@ export class TaskService {
 
   getAllTask() {
     return this.httpClient.get(this.TASK_URL);
+  }
+
+  getCompletedTask() {
+    let params = new HttpParams().set("completed", 'true');
+    return this.httpClient.get(this.TASK_URL, {params: params});
   }
 
   addNewTask(description) {

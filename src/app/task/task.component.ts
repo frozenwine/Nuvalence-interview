@@ -4,6 +4,7 @@ import { TaskService } from './task.service';
 import { Component, OnInit } from '@angular/core';
 import { TaskItem } from './task-item.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-task',
@@ -28,6 +29,7 @@ export class TaskComponent implements OnInit {
     },
   ];
   displayedColumns: string[] = [...this.columns.map(x => x.columnDef)];
+  taskFilter = 'all';
 
   constructor(
     private taskSerive: TaskService,
@@ -40,6 +42,17 @@ export class TaskComponent implements OnInit {
 
   loadALlTask() {
     this.taskSerive.getAllTask().subscribe(
+      res => {
+        console.log(res);
+        this.tasks = res['data'];
+        this.count = this.tasks.length;
+        this.dataSource = new MatTableDataSource(this.tasks);
+      }
+    );
+  }
+
+  loadCompletedTask() {
+    this.taskSerive.getCompletedTask().subscribe(
       res => {
         console.log(res);
         this.tasks = res['data'];
@@ -74,11 +87,38 @@ export class TaskComponent implements OnInit {
   }
 
   editTask(row: TaskItem) {
+    if(!row.completed) {
+      this.markTaskAsCompleted(row);
+    } else {
+      this.markTaskAsIncompleted(row);
+    }
+  }
+
+  markTaskAsCompleted(row: TaskItem) {
     this.modalService.launchConfirmModal('Edit Task', `Mark Task: ${row.description} as Completed?`)
       .subscribe(res => {
         if(res) {
           this.notif.notif("Updating task...")
           this.taskSerive.updateTask(row, {"completed": true}).subscribe(
+            res =>  {
+              this.notif.notif("Task Updated");
+              this.loadALlTask();
+            },
+            err => {
+              err.error = err.message;
+              this.notif.notifErr(err)
+            }
+          )
+        }
+      })
+  }
+
+  markTaskAsIncompleted(row: TaskItem) {
+    this.modalService.launchConfirmModal('Edit Task', `Mark Task: ${row.description} as Incompleted?`)
+      .subscribe(res => {
+        if(res) {
+          this.notif.notif("Updating task...")
+          this.taskSerive.updateTask(row, {"completed": false}).subscribe(
             res =>  {
               this.notif.notif("Task Updated");
               this.loadALlTask();
@@ -109,6 +149,15 @@ export class TaskComponent implements OnInit {
           )
         }
       })
+  }
+
+  taskFilterChanged($event: MatRadioChange) {
+    console.log($event);
+    if($event.value == 'completed') {
+      this.loadCompletedTask();
+    } else {
+      this.loadALlTask();
+    }
   }
 
 }
