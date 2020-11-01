@@ -1,1 +1,18 @@
-<p>profile works!</p>
+<div fxLayout="column" fxLayoutAlign="start start" class="profile-main" fxLayoutGap="30px">
+  <mat-card>
+    <base-input label="age" [dataControl]="ageController"></base-input>
+    <button mat-raised-button color="accent" (click)="updateClicked()">Update</button>
+
+  </mat-card>
+  
+  <div fxLayout="row" fxLayoutGap="20px">
+    <span class="material-icons" (click)="browseButtonClicked()">
+      cloud_upload
+    </span>
+    <span>Upload Image</span>
+    <input hidden type="file" #fileInput (change)="browseFile($event)">
+  </div>
+
+  <img *ngIf="imageUrl" [src]="imageUrl" alt="No Image">
+
+</div>

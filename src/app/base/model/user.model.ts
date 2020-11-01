@@ -4,4 +4,5 @@ export class User {
   email: string;
   name: string;
   updatedAt: Date;
+  _id: string;
 }

@@ -17,4 +17,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['task']);
   }
 
+  profileTileClicked() {
+    this.router.navigate(['profile']);
+  }
+
 }

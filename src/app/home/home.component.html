@@ -1,10 +1,19 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="home-main">
+<div fxLayout="row" fxLayoutAlign="start center" class="home-main" fxLayoutGap="30px">
   <mat-card (click)="taskTileClicked()">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <span class="material-icons">
         assignment
         </span>
       <span class="home-label">Your Task</span>
+      </div>
+  </mat-card>
+
+  <mat-card (click)="profileTileClicked()">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="material-icons">
+        home
+        </span>
+      <span class="home-label">Your Profile</span>
       </div>
   </mat-card>
   

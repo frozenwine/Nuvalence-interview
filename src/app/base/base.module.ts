@@ -1,21 +1,15 @@
+import { ProfileComponent } from './../profile/profile.component';
+import { MaterialModule } from './material.module';
 import { BaseInputModule } from './components/base-input/base-input.module';
 import { ConfirmModalModule } from './modal/confirm-modal/confirm-modal.module';
 import { ConfirmModalComponent } from './modal/confirm-modal/confirm-modal.component';
 import { MainComponent } from './main/main.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { MatButtonModule } from '@angular/material/button';
 import { BaseRoutingModule } from './base-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from '../home/home.component';
@@ -23,45 +17,29 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptor/api.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TaskComponent } from '../task/task.component';
 import { InputModalModule } from './modal/input-modal/input-modal.module';
-import { MatTableModule } from '@angular/material/table';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatRadioModule } from '@angular/material/radio';
-import { ProfileComponent } from '../profile/profile.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent,
     TaskComponent,
+    HomeComponent,
     ProfileComponent
   ],
   imports: [
     CommonModule,
     BaseRoutingModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule,
-    MatDialogModule,
     ConfirmModalModule,
     FlexLayoutModule,
-    MatCardModule,
-    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     BaseInputModule,
     HttpClientModule,
-    MatSnackBarModule,
     InputModalModule,
-    MatTableModule,
-    MatSlideToggleModule,
-    MatRadioModule
+    MaterialModule
   ],
   exports: [
     MainComponent

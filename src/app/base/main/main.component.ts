@@ -2,13 +2,14 @@ import { LoginService } from './../service/login.service';
 import { NavItem } from './../model/nav-item.model';
 import { ModalService } from './../service/modal.service';
 import { UserSessionService } from './../service/user-session.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { ModalModel } from '../service/modal.service';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { NotificationService } from '../service/notification.service';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'base-main',
@@ -16,6 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.less']
 })
 export class MainComponent implements OnInit {
+
+  @ViewChild('snav') snav: MatSidenav;
 
   mobileQuery: MediaQueryList;
 
@@ -113,6 +116,8 @@ export class MainComponent implements OnInit {
     } else {
       this.router.navigate([nav.path]);
     }
+
+    this.snav.toggle();
   }
 
   showMessage(message: string) {

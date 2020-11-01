@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from '../service/notification.service';
+import { RegExValidation } from '../validation/regex.validator';
+import { REG_EX_CONSTANTS } from '../validation/regex';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +26,7 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       name: ['', Validators.required],
-      age: ['', Validators.required],
+      age: ['', [Validators.required, RegExValidation(REG_EX_CONSTANTS.INTEGER)]],
     });
   }
 
