@@ -19,6 +19,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
 import { TaskComponent } from '../task/task.component';
 import { InputModalModule } from './modal/input-modal/input-modal.module';
+import { HiddenInputModule } from './components/hidden-input/hidden-input.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { InputModalModule } from './modal/input-modal/input-modal.module';
     BaseInputModule,
     HttpClientModule,
     InputModalModule,
-    MaterialModule
+    MaterialModule,
+    HiddenInputModule
   ],
   exports: [
     MainComponent

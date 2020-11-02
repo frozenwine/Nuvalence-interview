@@ -1,0 +1,6 @@
+<mat-form-field class="full-width">
+  <mat-label>{{label}}</mat-label>
+  <input matInput [placeholder]="placeholder" [formControl]="dataControl" type="password" #inputField>
+  <mat-icon matSuffix (click)="toggleVisibility()">visibility</mat-icon>
+  <mat-error>{{getErrorMessage()}}</mat-error>
+</mat-form-field>

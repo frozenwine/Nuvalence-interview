@@ -6,7 +6,7 @@
     <mat-card-content>
       <form fxLayout="column">
         <base-input label="Email" [dataControl]="signupForm.get('email')"></base-input>
-        <base-input label="Password" [dataControl]="signupForm.get('password')"></base-input>
+        <hidden-input label="Password" [dataControl]="signupForm.get('password')"></hidden-input>
         <base-input label="Name" [dataControl]="signupForm.get('name')"></base-input>
         <base-input label="age" [dataControl]="signupForm.get('age')"></base-input>
       </form>

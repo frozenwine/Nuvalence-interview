@@ -160,4 +160,12 @@ export class TaskComponent implements OnInit {
     }
   }
 
+  taskClicked(row) {
+    console.log('taskClicked: ', row);
+  }
+
+  clickColumn($event, column, row) {
+    $event.stopPropagation();
+    column.showModal(row);
+  }
 }

@@ -6,7 +6,7 @@
     <mat-card-content>
       <form fxLayout="column">
         <base-input label="Email" [dataControl]="loginFormGroup.get('email')"></base-input>
-        <base-input label="Password" [dataControl]="loginFormGroup.get('password')"></base-input>
+        <hidden-input label="Password" [dataControl]="loginFormGroup.get('password')"></hidden-input>
       </form>
     </mat-card-content>
     <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
