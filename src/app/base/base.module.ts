@@ -1,4 +1,4 @@
-import { ProfileComponent } from './../profile/profile.component';
+import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { BaseInputModule } from './components/base-input/base-input.module';
 import { ConfirmModalModule } from './modal/confirm-modal/confirm-modal.module';
@@ -12,12 +12,10 @@ import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from '../home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptor/api.interceptor';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LoginGuard } from './service/login.guard';
-import { TaskComponent } from '../task/task.component';
 import { InputModalModule } from './modal/input-modal/input-modal.module';
 import { HiddenInputModule } from './components/hidden-input/hidden-input.module';
 
@@ -26,9 +24,6 @@ import { HiddenInputModule } from './components/hidden-input/hidden-input.module
     MainComponent,
     LoginComponent,
     SignupComponent,
-    TaskComponent,
-    HomeComponent,
-    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +36,8 @@ import { HiddenInputModule } from './components/hidden-input/hidden-input.module
     HttpClientModule,
     InputModalModule,
     MaterialModule,
-    HiddenInputModule
+    HiddenInputModule,
+    RouterModule
   ],
   exports: [
     MainComponent
