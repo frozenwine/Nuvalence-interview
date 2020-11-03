@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [ConfirmModalComponent],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
   ]
 })
 export class ConfirmModalModule { }
